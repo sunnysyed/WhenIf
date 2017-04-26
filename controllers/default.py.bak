@@ -17,8 +17,5 @@ def index():
 def search():
     return dict()
 
-def result():
-    return dict()
-
 def error():
     return dict()

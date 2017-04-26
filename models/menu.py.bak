@@ -10,7 +10,7 @@ response.menu = []
 if auth.is_logged_in():
     response.menu = [ 
             (T('When If'),URL('default','index')==URL(),URL('default','index'),[]),
-            (T('Search'),URL('default','search')==URL(),URL('default','search'),[]),
+            (T('Search'),URL('default','search')==URL(),URL('default','search'),[])
             (T('Courses'),URL('default','index')==URL(),A('Courses', _href="https://www.cdm.depaul.edu/academics/Pages/CourseCatalog.aspx", _target="_blank"),[]),
             (T('Degree Requirements'),URL('default','index')==URL(),A('Degree Requirements', _href="https://www.cdm.depaul.edu/academics/Pages/CourseCatalog.aspx", _target="_blank"),[]),
         ]
