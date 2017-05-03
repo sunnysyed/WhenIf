@@ -59,6 +59,8 @@ classLinks['IPD'] = "http://odata.cdm.depaul.edu/Cdm.svc/Courses?$orderby=Catalo
 
 classLinks['MGT'] = "http://odata.cdm.depaul.edu/Cdm.svc/Courses?$orderby=CatalogNbr&$filter=EffStatus%20eq%20%27A%27%20and%20SubjectId%20eq%27MGT%27&$format=json"
 
+classLinks['IT'] = "http://odata.cdm.depaul.edu/Cdm.svc/Courses?$orderby=CatalogNbr&$filter=EffStatus%20eq%20%27A%27%20and%20SubjectId%20eq%27IT%27&$format=json"
+
 for key in classLinks:
     classDict[key] = []
 
@@ -85,20 +87,23 @@ def get_Degrees():
 
     return degrees
 
+def get_priority():
+    #get_terms must be finished first.
+    return
+
 def get_prereqs(DescrLong):
     #"PREREQUISITE(S)" are structured in varying formats in data, so currently only returns string.
     #Will need to make a more in-depth parser to solve this.
     if DescrLong is None:
         return []
     if "PREREQUISITE(S)" in DescrLong:
-        return DescrLong.split("PREREQUISITE(S)")[1]
+        x = DescrLong.split("PREREQUISITE(S)")[1]
+        #print(x)
+        return x
 
-def get_terms():
+def get_terms(TypicallyOffered):
     #Will parse "TypicallyOffered" data.
-    return
-
-def get_priority():
-    #get_terms must be finished first.
+    #print(TypicallyOffered)
     return
 
 def get_Classes(links):
@@ -106,7 +111,29 @@ def get_Classes(links):
         response = urllib.urlopen(links[x])
         data = json.loads(response.read())
         for y in data['d']['results']:
-            classDict[x].append(Class(y['CatalogNbr'], y["CourseTitleLong"], False, get_prereqs(y["DescrLong"]), y["TypicallyOffered"], y["IsInClassOnly"], y["IsOnlineOnly"], 0))
+            classDict[x].append(Class(y['CatalogNbr'], y["CourseTitleLong"], False, get_prereqs(y["DescrLong"]), get_terms(y["TypicallyOffered"]), y["IsInClassOnly"], y["IsOnlineOnly"], 0))
+
+def put_classes():
+    for x in degrees:
+        for y in x.concentrations:
+            url = base + y.link
+            soup = get_soup_from_url(url)
+            count = 0
+            total = len(soup.findAll("table", { "class" : "courseList" }))
+            if x == degrees[1]:
+                total = 2
+            while count < total:
+                for tr in soup.findAll("table", { "class" : "courseList" })[count].findAll('tbody'):
+                    for z in tr:
+                        for a in z:
+                            for b in a:
+                                try:
+                                    number = b.split()
+                                    found = next((c for c in classDict[number[0]] if c.code == number[1]), None)
+                                except:
+                                    pass
+                                y.classes.append(found)
+                count+=1
 
 def get_soup_from_url(url):
     opener = urllib2.build_opener()
@@ -120,6 +147,8 @@ def get_soup_from_url(url):
 degrees = get_Degrees()
 
 get_Classes(classLinks)
+
+put_classes()
 
 # - - - - - DEBUG - - - - - #
 
@@ -142,3 +171,7 @@ get_Classes(classLinks)
 ##    print x.name
 ##    for y in x.concentrations:
 ##        print y.name
+##        print y.link
+##        for z in y.classes:
+##            print z.name
+##            print z
