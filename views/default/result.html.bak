@@ -1,0 +1,436 @@
+{{extend 'layout.html'}}
+<div class="container-fluid">
+	<div class="row">
+        <h3 class="col-xs-12">Fastest Route</h3>
+		<div class="col-xs-12">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th class="active">
+							Summer
+						</th>
+						<th class="warning">
+							Fall
+						</th>
+						<th class="danger">
+							Winter
+						</th>
+						<th class="warning">
+							Spring
+						</th>
+                        <th class="active">
+							Summer
+						</th>
+						<th class="warning">
+							Fall
+						</th>
+						<th class="danger">
+							Winter
+						</th>
+						<th class="warning">
+							Spring
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="active">
+							CSC 1
+						</td>
+						<td class="warning">
+							CSC 2
+						</td>
+						<td class="danger">
+							CSC 3
+						</td>
+						<td class="warning">
+							CSC 4
+						</td>
+                        <td class="active">
+							CSC 5
+						</td>
+						<td class="warning">
+							CSC 6
+						</td>
+						<td class="danger">
+							CSC 7
+						</td>
+						<td class="warning">
+							CSC 8
+						</td>
+					</tr>
+                    <tr>
+						<td class="active">
+							IS 1
+						</td>
+						<td class="warning">
+							IS 2
+						</td>
+						<td class="danger">
+							IS 3
+						</td>
+						<td class="warning">
+							IS 4
+						</td>
+                        <td class="active">
+							IS 5
+						</td>
+						<td class="warning">
+							IS 6
+						</td>
+						<td class="danger">
+							IS 7
+						</td>
+						<td class="warning">
+							IS 8
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+    <div class="row">
+        <h3 class="col-xs-12">Night Friendly Route</h3>
+		<div class="col-xs-12">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th class="active">
+							Summer
+						</th>
+						<th class="warning">
+							Fall
+						</th>
+						<th class="danger">
+							Winter
+						</th>
+						<th class="warning">
+							Spring
+						</th>
+                        <th class="active">
+							Summer
+						</th>
+						<th class="warning">
+							Fall
+						</th>
+						<th class="danger">
+							Winter
+						</th>
+						<th class="warning">
+							Spring
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="active">
+							CSC 1
+						</td>
+						<td class="warning">
+							CSC 2
+						</td>
+						<td class="danger">
+							CSC 3
+						</td>
+						<td class="warning">
+							CSC 4
+						</td>
+                        <td class="active">
+							CSC 5
+						</td>
+						<td class="warning">
+							CSC 6
+						</td>
+						<td class="danger">
+							CSC 7
+						</td>
+						<td class="warning">
+							CSC 8
+						</td>
+					</tr>
+                    <tr>
+						<td class="active">
+							IS 1
+						</td>
+						<td class="warning">
+							IS 2
+						</td>
+						<td class="danger">
+							IS 3
+						</td>
+						<td class="warning">
+							IS 4
+						</td>
+                        <td class="active">
+							IS 5
+						</td>
+						<td class="warning">
+							IS 6
+						</td>
+						<td class="danger">
+							IS 7
+						</td>
+						<td class="warning">
+							IS 8
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+    <div class="row">
+        <h3 class="col-xs-12">Easiest Route</h3>
+		<div class="col-xs-12">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th class="active">
+							Summer
+						</th>
+						<th class="warning">
+							Fall
+						</th>
+						<th class="danger">
+							Winter
+						</th>
+						<th class="warning">
+							Spring
+						</th>
+                        <th class="active">
+							Summer
+						</th>
+						<th class="warning">
+							Fall
+						</th>
+						<th class="danger">
+							Winter
+						</th>
+						<th class="warning">
+							Spring
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="active">
+							CSC 1
+						</td>
+						<td class="warning">
+							CSC 2
+						</td>
+						<td class="danger">
+							CSC 3
+						</td>
+						<td class="warning">
+							CSC 4
+						</td>
+                        <td class="active">
+							CSC 5
+						</td>
+						<td class="warning">
+							CSC 6
+						</td>
+						<td class="danger">
+							CSC 7
+						</td>
+						<td class="warning">
+							CSC 8
+						</td>
+					</tr>
+                    <tr>
+						<td class="active">
+							IS 1
+						</td>
+						<td class="warning">
+							IS 2
+						</td>
+						<td class="danger">
+							IS 3
+						</td>
+						<td class="warning">
+							IS 4
+						</td>
+                        <td class="active">
+							IS 5
+						</td>
+						<td class="warning">
+							IS 6
+						</td>
+						<td class="danger">
+							IS 7
+						</td>
+						<td class="warning">
+							IS 8
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+    <div class="row">
+        <h3 class="col-xs-12">Longest Route</h3>
+		<div class="col-xs-12">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th class="active">
+							Summer
+						</th>
+						<th class="warning">
+							Fall
+						</th>
+						<th class="danger">
+							Winter
+						</th>
+						<th class="warning">
+							Spring
+						</th>
+                        <th class="active">
+							Summer
+						</th>
+						<th class="warning">
+							Fall
+						</th>
+						<th class="danger">
+							Winter
+						</th>
+						<th class="warning">
+							Spring
+						</th>
+                        <th class="active">
+							Summer
+						</th>
+						<th class="warning">
+							Fall
+						</th>
+						<th class="danger">
+							Winter
+						</th>
+						<th class="warning">
+							Spring
+						</th>
+                        <th class="active">
+							Summer
+						</th>
+						<th class="warning">
+							Fall
+						</th>
+						<th class="danger">
+							Winter
+						</th>
+						<th class="warning">
+							Spring
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="active">
+							CSC 1
+						</td>
+						<td class="warning">
+							CSC 2
+						</td>
+						<td class="danger">
+							CSC 3
+						</td>
+						<td class="warning">
+							CSC 4
+						</td>
+                        <td class="active">
+							CSC 5
+						</td>
+						<td class="warning">
+							CSC 6
+						</td>
+						<td class="danger">
+							CSC 7
+						</td>
+						<td class="warning">
+							
+						</td>
+                        <td class="active">
+							CSC 1
+						</td>
+						<td class="warning">
+							CSC 2
+						</td>
+						<td class="danger">
+							CSC 3
+						</td>
+						<td class="warning">
+							CSC 4
+						</td>
+                        <td class="active">
+							CSC 5
+						</td>
+						<td class="warning">
+							CSC 6
+						</td>
+						<td class="danger">
+							CSC 7
+						</td>
+						<td class="warning">
+							CSC 8
+						</td>
+					</tr>
+                    <tr>
+						<td class="active">
+							
+						</td>
+						<td class="warning">
+							IS 2
+						</td>
+						<td class="danger">
+							IS 3
+						</td>
+						<td class="warning">
+							IS 4
+						</td>
+                        <td class="active">
+							IS 5
+						</td>
+						<td class="warning">
+							IS 6
+						</td>
+						<td class="danger">
+							IS 7
+						</td>
+						<td class="warning">
+							IS 8
+						</td>
+                        <td class="active">
+							IS 1
+						</td>
+						<td class="warning">
+							IS 2
+						</td>
+						<td class="danger">
+							IS 3
+						</td>
+						<td class="warning">
+							IS 4
+						</td>
+                        <td class="active">
+							IS 5
+						</td>
+						<td class="warning">
+							IS 6
+						</td>
+						<td class="danger">
+							IS 7
+						</td>
+						<td class="warning">
+							IS 8
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{{=BEAUTIFY(response._vars)}}

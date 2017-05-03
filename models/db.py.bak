@@ -90,7 +90,7 @@ plugins = PluginManager()
 # -------------------------------------------------------------------------
 # create all tables needed by auth if not custom tables
 # -------------------------------------------------------------------------
-auth.define_tables(username=False, signature=False)
+auth.define_tables(username=True, signature=False)
 
 #auth_table=auth.settings.table_user
 #auth_table.username.requires = IS_NOT_IN_DB(db, auth_table.username)

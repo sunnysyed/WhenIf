@@ -1,0 +1,89 @@
+{{extend 'layout.html'}}
+<form class="form-horizontal" action="result">
+<fieldset>
+
+<legend>WhenIf</legend>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="degree">Degrees Selection</label>
+  <div class="col-md-4">
+    <select id="degree" name="degree" class="form-control">
+      <option value="cs">Masters in Computer Science</option>
+      <option value="is">Masters in Information Security</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="concentration">Concentration</label>
+  <div class="col-md-4">
+    <select id="concentration" name="concentration" class="form-control">
+      <option value="1">1</option>
+      <option value="2">2</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="quarter">Starting Quarter</label>
+  <div class="col-md-4">
+    <select id="quarter" name="quarter" class="form-control">
+      <option value="Fall">Fall</option>
+      <option value="Winter">Winter</option>
+      <option value="Spring">Spring</option>
+      <option value="Summer">Summer</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="courses">Number of Courses Per/Quarter</label>
+  <div class="col-md-4"> 
+    <label class="radio-inline" for="courses-0">
+      <input type="radio" name="courses" id="courses-0" value="1" checked="checked">
+      1
+    </label> 
+    <label class="radio-inline" for="courses-1">
+      <input type="radio" name="courses" id="courses-1" value="2">
+      2
+    </label> 
+    <label class="radio-inline" for="courses-2">
+      <input type="radio" name="courses" id="courses-2" value="3">
+      3
+    </label> 
+    <label class="radio-inline" for="courses-3">
+      <input type="radio" name="courses" id="courses-3" value="4">
+      4
+    </label>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="delivery">Course Delivery</label>
+  <div class="col-md-4">
+  <div class="checkbox">
+    <label for="delivery-0">
+      <input type="checkbox" name="delivery" id="delivery-0" value="Classroom">
+      Classroom
+    </label>
+	</div>
+  <div class="checkbox">
+    <label for="delivery-1">
+      <input type="checkbox" name="delivery" id="delivery-1" value="Online">
+      Online
+    </label>
+	</div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-4 control-label" for="search"></label>
+  <div class="col-md-4">
+    <button id="search" class="btn btn-primary">Search</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+{{=BEAUTIFY(response._vars)}}
