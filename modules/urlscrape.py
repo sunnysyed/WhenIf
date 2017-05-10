@@ -94,8 +94,6 @@ def get_priority():
     return
 
 def get_prereqs(DescrLong):
-    #"PREREQUISITE(S)" are structured in varying expressions in data, so currently only returns string.
-    #Will need to make a more in-depth parser to solve this.
     prereqs = []
     if DescrLong is None:
         return prereqs
