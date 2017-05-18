@@ -1,4 +1,6 @@
 from gluon.storage import Storage
+from gluon.tools import Mail
+
 import time
 settings = Storage()
 

@@ -87,6 +87,17 @@ auth = Auth(db, host_names=myconf.get('host.names'))
 service = Service()
 plugins = PluginManager()
 
+## after auth = Auth(db)
+auth.settings.extra_fields['auth_user']= [
+  Field('address', 'string'),
+  Field('phone', 'string'),
+  Field('date_of_birth', 'datetime'),
+  Field('sex', 'string'),
+  Field('faculty_Id', 'integer'),
+  Field('major_Id', 'integer'),
+  Field('start_date', 'datetime')
+]
+
 # -------------------------------------------------------------------------
 # create all tables needed by auth if not custom tables
 # -------------------------------------------------------------------------
