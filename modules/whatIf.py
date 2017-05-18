@@ -6,8 +6,7 @@ from collections import OrderedDict
 
 # - - - - - FUNCTIONS - - - - - #
 
-def whatIf(degree, concentration, start, classAmount):
-    taken = []
+def whatIf(degree, concentration, start, classAmount, taken):
     seasons = ['Fall', 'Winter', 'Spring', 'Summer']
     classOrder = OrderedDict()
     for z in concentrationDict[concentration].classes:
@@ -94,9 +93,9 @@ def check_pres(cl, taken):
                                                         
 # - - - - - RUN PROGRAM - - - - - #
 
-##whatIf('Computer Science', "Computer Science", 'Fall', 4)
+##whatIf('Computer Science', "Computer Science", 'Fall', 4, [])
 ##whatIf("Information Systems", "Business Analysis/Systems Analysis Concentration", 'Fall', 4)
-##whatIf("Information Systems", "Business Intelligence Concentration", 'Fall', 4)
-##whatIf("Information Systems", "Database Administration Concentration", 'Fall', 4)
-##whatIf("Information Systems", "IT Enterprise Management Concentration", 'Fall', 4)
-##whatIf("Information Systems", "Standard Concentration", 'Fall', 4)
+##whatIf("Information Systems", "Business Intelligence Concentration", 'Fall', 4, [])
+##whatIf("Information Systems", "Database Administration Concentration", 'Fall', 4, [])
+##whatIf("Information Systems", "IT Enterprise Management Concentration", 'Fall', 4, [])
+##whatIf("Information Systems", "Standard Concentration", 'Fall', 4, [])
