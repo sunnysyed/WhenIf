@@ -136,7 +136,7 @@ concentrationDict["IT Enterprise Management Concentration"].classes = ['IS 421',
 concentrationDict["Standard Concentration"].classes = ['IS 421', 'CSC 451', 'IS 422', 'IS 430', 'IS 577']
 concentrationDict["Computer Science"].classes = ['CSC 400', 'CSC 401', 'CSC 402', 'CSC 403', 'CSC 406', 'CSC 407', 'CSC 421', 'CSC 435', 'CSC 447', 'CSC 453', 'SE 450']
 
-def getSeedData:
+def getSeedData():
     concentrationsAndClasses = {}
     concentrationsAndClasses['concentrations'] = concentrationDict
     concentrationsAndClasses['classes'] = classDict
