@@ -17,7 +17,7 @@ class Degree:
 class Concentration:
     def __init__(self, name, link, classes, electiveCount):
         self.name = name
-        self.link = link
+        self.link = link #NOT NECESSARY
         self.classes = classes
         self.electiveCount = electiveCount
 
@@ -25,13 +25,13 @@ class Class:
     def __init__(self, code, name, isIntro, prereqs, terms, inClassOnly, onlineOnly, priority, OR):
         self.code = code
         self.name = name
-        self.isIntro = isIntro
+        self.isIntro = isIntro #NOT NECESSARY
         self.prereqs = prereqs
         self.terms = terms
         self.inClassOnly = inClassOnly
-        self.onlineOnly = onlineOnly
+        self.onlineOnly = onlineOnly #NOT NECESSARY
         self.priority = priority
-        self.OR = OR
+        self.OR = OR #NOT NECESSARY
 
 # - - - - - DATA STORAGE - - - - - #
 
@@ -135,6 +135,13 @@ concentrationDict["Database Administration Concentration"].classes = ['CSC 401',
 concentrationDict["IT Enterprise Management Concentration"].classes = ['IS 421', 'CSC 451', 'IS 422', 'IS 430', 'ECT 424', 'IS 556', 'IS 570', 'IS 535', 'CNS 440', 'ECT 556', 'IS 440', 'IS 483', 'IS 500', 'MGT 500', 'IS 505', 'IS 506', 'IS 535', 'IS 536', 'IS 540', 'IS 550', 'IS 560', 'IS 565', 'IS 579', 'IS 580', 'IS 577']
 concentrationDict["Standard Concentration"].classes = ['IS 421', 'CSC 451', 'IS 422', 'IS 430', 'IS 577']
 concentrationDict["Computer Science"].classes = ['CSC 400', 'CSC 401', 'CSC 402', 'CSC 403', 'CSC 406', 'CSC 407', 'CSC 421', 'CSC 435', 'CSC 447', 'CSC 453', 'SE 450']
+
+def getSeedData:
+    concentrationsAndClasses = {}
+    concentrationsAndClasses['concentrations'] = concentrationDict
+    concentrationsAndClasses['classes'] = classDict
+    return concentrationsAndClasses
+
 # - - - - - DEBUG - - - - - #
 
 ##for x in classDict:
