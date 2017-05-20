@@ -16,7 +16,6 @@ def whatIf(degree, concentration, start, classAmount, taken, seedData):
     season = 0
     electiveCount = concentrationDict[concentration].electiveCount
     MECCount = 0
-    MEC = []
     
     if (degree == 'Computer Science') or concentration == "Standard Concentration":
         MEC = []

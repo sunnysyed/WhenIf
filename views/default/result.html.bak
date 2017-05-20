@@ -1,35 +1,30 @@
 {{extend 'layout.html'}}
+{{ seasons = ['Fall', 'Winter', 'Spring', 'Summer']}}
+{{current_quarter = request.vars.quarter}}
+
 <div class="container-fluid">
 	<div class="row">
         <h3 class="col-xs-12">Fastest Route</h3>
 		<div class="col-xs-12">
 			<table class="table table-striped table-hover">
 				<thead>
+                    
 					<tr>
+                        {{quaters = len(data) / int(request.vars.courses)}} 
+                        {{ for i in range(0, quaters):}}
 						<th class="active">
-							Summer
+                            {{= current_quarter + str(i)}}
+                            {{ if current_quarter == 'Fall':}}
+                                {{current_quarter = 'Winter'}}
+                            {{ elif current_quarter == 'Winter': }}
+                                {{current_quarter = 'Spring'}}
+                            {{ elif current_quarter == 'Spring':}}
+                                  {{current_quarter = 'Summer'}}  
+                            {{ elif current_quarter == 'Summer':}}
+                                  {{current_quarter = 'Fall'}}  
+                            {{pass}}
 						</th>
-						<th class="warning">
-							Fall
-						</th>
-						<th class="danger">
-							Winter
-						</th>
-						<th class="warning">
-							Spring
-						</th>
-                        <th class="active">
-							Summer
-						</th>
-						<th class="warning">
-							Fall
-						</th>
-						<th class="danger">
-							Winter
-						</th>
-						<th class="warning">
-							Spring
-						</th>
+                        {{pass}}
 					</tr>
 				</thead>
 				<tbody>
@@ -397,7 +392,6 @@
 							IS 6
 						</td>
 						<td class="danger">
-							IS 7
 						</td>
 						<td class="warning">
 							IS 8
@@ -406,7 +400,6 @@
 							IS 1
 						</td>
 						<td class="warning">
-							IS 2
 						</td>
 						<td class="danger">
 							IS 3
@@ -421,7 +414,6 @@
 							IS 6
 						</td>
 						<td class="danger">
-							IS 7
 						</td>
 						<td class="warning">
 							IS 8
@@ -434,3 +426,4 @@
 	</div>
 </div>
 {{=BEAUTIFY(response._vars)}}
+{{=BEAUTIFY(request.vars)}}

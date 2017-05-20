@@ -14,8 +14,52 @@ def call(): return service()
 def index():
     return dict()
 
+@auth.requires_login()
 def search():
     return dict()
+@auth.requires_login()
+def result():
+    seedData = seed.getSeedData()
+    data = whatIf.whatIf(request.vars.degree, "Computer Science", request.vars.quarter, int(request.vars.courses), [], seedData)
+    return dict(data=data, seedData=seedData)
 
+@auth.requires_login()
+@auth.requires_membership("faculty")
+def students():
+    grid = SQLFORM.grid(db.auth_user)
+    return locals()
 def error():
     return dict()
+
+'''
+Place this in a controller and call it, either by url or directly from code.
+An email(or multiple) with the correct settings will be sent to the 
+test address.
+'''
+def test():
+    mail = Mail()
+    bases = ['email-smtp.us-west-2.amazonaws.com']
+    prefixes = ['']
+    ports = [':25']
+    sender = 'sunnysyed93@gmail.com'
+    login = 'AKIAICHBNDVEZJHTFPQA:Aujg0dUgumrs0r8qvpKpIxAQOEnZJZYbmfdarK+dMxpD'
+    send_test_to = 'sunnysyed93@gmail.com'
+    count = 0
+    mail.settings.tls = True #Here so you can set to False if things fail?
+    result = ""
+    for base in bases:
+        for prefix in prefixes:
+            for port in ports:
+                server = '{0}{1}{2}'.format(prefix, base, port)
+                msg = 'test'
+                # So you can correlate with error codes. Note some servers don't like print!
+                mail.settings.server = server
+                mail.settings.sender = sender
+                mail.settings.login = login
+                result += " " + str(mail.send(to=[send_test_to],
+                      subject='hello',
+                      reply_to='us@example.com',
+                      message=msg
+                      ))
+                count += 1
+    return dict(message="tried {0} combinations".format(count), result=result)

@@ -1,8 +1,4 @@
 from gluon.storage import Storage
-from applications.WhenIf.modules import seed
-from applications.WhenIf.modules import whatIf
-
-
 import time
 settings = Storage()
 
@@ -16,9 +12,9 @@ settings.description = ''
 settings.layout_theme = 'Default'
 settings.database_uri = 'sqlite://storage.sqlite'
 settings.security_key = 'f03ffe2f-fb9b-4cd1-a5c2-46e38ce44a97'
-settings.email_server = 'localhost'
-settings.email_sender = 'you@example.com'
-settings.email_login = ''
+settings.email_server = 'email-smtp.us-west-2.amazonaws.com:587'
+settings.email_sender = 'sunnysyed93@gmail.com'
+settings.email_login = 'AKIAJQUX4SXTR6EZTPTQ:AntI4wwCfvOqDMnNddnW00Fu6ZQzmU8P4HxxFn2QSKXm'
 settings.login_method = 'local'
 settings.login_config = ''
 settings.plugins = []

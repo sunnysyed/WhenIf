@@ -12,12 +12,16 @@ if request.global_settings.web2py_version < "2.14.1":
 # if SSL/HTTPS is properly configured and you want all HTTP requests to
 # be redirected to HTTPS, uncomment the line below:
 # -------------------------------------------------------------------------
-# request.requires_https()
+request.requires_https()
 
 # -------------------------------------------------------------------------
 # app configuration made easy. Look inside private/appconfig.ini
 # -------------------------------------------------------------------------
 from gluon.contrib.appconfig import AppConfig
+from gluon.tools import Mail
+from gluon.tools import Recaptcha
+
+
 
 # -------------------------------------------------------------------------
 # once in production, remove reload=True to gain full speed
@@ -30,7 +34,7 @@ if not request.env.web2py_runtime_gae:
     # ---------------------------------------------------------------------
     db = DAL(myconf.get('db.uri'),
              pool_size=myconf.get('db.pool_size'),
-             migrate_enabled=myconf.get('db.migrate'),
+             migrate_enabled=True,
              check_reserved=['all'])
 else:
     # ---------------------------------------------------------------------
@@ -88,15 +92,15 @@ service = Service()
 plugins = PluginManager()
 
 ## after auth = Auth(db)
-auth.settings.extra_fields['auth_user']= [
-  Field('address', 'string'),
-  Field('phone', 'string'),
-  Field('date_of_birth', 'datetime'),
-  Field('sex', 'string'),
-  Field('faculty_Id', 'integer'),
-  Field('major_Id', 'integer'),
-  Field('start_date', 'datetime')
-]
+#auth.settings.extra_fields['auth_user']= [
+#  Field('address', 'string'),
+#  Field('phone', 'string'),
+#  Field('date_of_birth', 'datetime'),
+#  Field('sex', 'string'),
+#  Field('faculty_Id', 'integer'),
+#  Field('major_Id', 'integer'),
+#  Field('start_date', 'datetime')
+#]
 
 # -------------------------------------------------------------------------
 # create all tables needed by auth if not custom tables
@@ -110,19 +114,25 @@ auth.define_tables(username=False, signature=False)
 # configure email
 # -------------------------------------------------------------------------
 mail = auth.settings.mailer
-mail.settings.server = 'logging' if request.is_local else myconf.get('smtp.server')
-mail.settings.sender = myconf.get('smtp.sender')
-mail.settings.login = myconf.get('smtp.login')
-mail.settings.tls = myconf.get('smtp.tls') or False
-mail.settings.ssl = myconf.get('smtp.ssl') or False
+mail.settings.server = 'email-smtp.us-west-2.amazonaws.com:25'
+mail.settings.sender = 'sunnysyed93@gmail.com'
+mail.settings.login = 'AKIAICHBNDVEZJHTFPQA:Aujg0dUgumrs0r8qvpKpIxAQOEnZJZYbmfdarK+dMxpD'
+mail.settings.tls = True
+
 
 # -------------------------------------------------------------------------
 # configure auth policy
 # -------------------------------------------------------------------------
-auth.settings.registration_requires_verification = True
-auth.settings.registration_requires_approval = True
+auth.settings.registration_requires_verification = False
+auth.settings.registration_requires_approval = False
 auth.settings.reset_password_requires_verification = True
-auth.settings.create_user_groups = False
+auth.settings.register_verify_password=False
+
+#auth.settings.captcha = Recaptcha(request,
+#    '6Le_JSIUAAAAADYiIaES37K7GdMjaYaCXcNLBLvb', '6Le_JSIUAAAAANU41ZeUVmRqsYu2HK_DgZHvx8l6')
+
+#auth.settings.verify_email_onaccept = lambda form: mail.send(to='sunnysyed93@gmail.com',subject='New Student Registration',message=repr(form.vars))
+
 
 
 # -------------------------------------------------------------------------
@@ -147,13 +157,8 @@ auth.settings.create_user_groups = False
 # -------------------------------------------------------------------------
 # auth.enable_record_versioning(db)
 
-db.define_table('person',
-                Field('name'),
-                Field('age', 'integer'))
 
-mail.settings.server = settings.email_server
-mail.settings.sender = settings.email_sender
-mail.settings.login = settings.email_login
+
 
 def user_bar():
     
