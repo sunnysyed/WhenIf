@@ -1,10 +1,10 @@
 ; App configuration
 [app]
-name        = WhenIf
-author      = Sunny
-description = when if
-keywords    = whenif
-generator   = whenif
+name        = Welcome
+author      = Your Name <you@example.com>
+description = a cool new app
+keywords    = web2py, python, framework
+generator   = Web2py Web Framework
 
 ; Host configuration
 [host]
@@ -27,4 +27,4 @@ ssl    = true
 ; form styling
 [forms]
 formstyle = bootstrap3_inline
-separator =
+separator = 

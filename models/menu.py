@@ -14,3 +14,5 @@ if auth.is_logged_in():
             (T('Courses'),URL('default','index')==URL(),A('Courses', _href="https://www.cdm.depaul.edu/academics/Pages/CourseCatalog.aspx", _target="_blank"),[]),
             (T('Degree Requirements'),URL('default','index')==URL(),A('Degree Requirements', _href="https://www.cdm.depaul.edu/academics/Pages/CourseCatalog.aspx", _target="_blank"),[]),
         ]
+if auth.is_logged_in() and auth.has_membership("faculty"):
+    response.menu.append((T('Students'),bool(request.controller == "default"), URL('default', 'students'), []))

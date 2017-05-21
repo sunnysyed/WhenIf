@@ -19,9 +19,7 @@ def search():
     return dict()
 @auth.requires_login()
 def result():
-    seedData = seed.getSeedData()
-    data = whatIf.whatIf(request.vars.degree, "Computer Science", request.vars.quarter, int(request.vars.courses), [], seedData)
-    return dict(data=data, seedData=seedData)
+    return dict()
 
 @auth.requires_login()
 @auth.requires_membership("faculty")
@@ -30,3 +28,11 @@ def students():
     return locals()
 def error():
     return dict()
+
+def test():
+    temp = mail.send(to=['sunnysyed93@gmail.com'],
+          subject='hello',
+          # If reply_to is omitted, then mail.settings.sender is used
+          reply_to='sunnysyed93@gmail.com',
+          message='hi there')
+    return response.json(temp)
