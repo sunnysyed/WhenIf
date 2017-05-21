@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
 
-db.define_table('degree_concentration',
-                Field('major_degree',requires = IS_NOT_EMPTY()),
-                Field('concentration',requires = IS_NOT_EMPTY()),
-                Field('link',requires = IS_NOT_EMPTY())
-                )
-
 db.define_table('course',
                 Field('course_name',requires = IS_NOT_EMPTY()),
                 Field('course_full_name',requires = IS_NOT_EMPTY()),

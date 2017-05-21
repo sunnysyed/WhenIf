@@ -9,7 +9,7 @@
   <div class="col-md-4">
     <select id="degree" name="degree" class="form-control">
       <option value="Computer Science">Masters in Computer Science</option>
-      <option value="is">Masters in Information Security</option>
+      <option value="Information Security">Masters in Information Security</option>
     </select>
   </div>
 </div>
@@ -18,11 +18,7 @@
   <label class="col-md-4 control-label" for="concentration">Concentration</label>
   <div class="col-md-4">
     <select id="concentration" name="concentration" class="form-control">
-      <option value="1">Standard Concentration</option>
-      <option value="Business Analysis/Systems Analysis Concentration">Business Analysis/Systems Analysis Concentration</option>
-      <option value="Business Intelligence Concentration">Business Intelligence Concentration</option>
-      <option value="Database Administration Concentration">Database Administration Concentration</option>
-      <option value="IT Enterprise Management Concentration">IT Enterprise Management Concentration</option>
+      <option value="Standard Concentration">Standard Concentration</option>
     </select>
   </div>
 </div>
@@ -88,5 +84,39 @@
 
 </fieldset>
 </form>
+
+<script>
+    $( "#degree" ).change(function(value) {
+      var current = $( "#degree" ).val();
+        $('#concentration').empty();
+      if (current == "Computer Science"){
+          $('#concentration').append($('<option>', {
+            value: 'Standard Concentration',
+            text: 'Standard Concentration'
+          }));
+      }else{
+          $('#concentration').append($('<option>', {
+            value: 'Standard Concentration',
+            text: 'Standard Concentration'
+          }));
+          $('#concentration').append($('<option>', {
+            value: 'Business Analysis/Systems Analysis Concentration',
+            text: 'Business Analysis/Systems Analysis Concentration'
+          }));
+          $('#concentration').append($('<option>', {
+            value: 'Business Intelligence Concentration',
+            text: 'Business Intelligence Concentration'
+          }));
+          $('#concentration').append($('<option>', {
+            value: 'Database Administration Concentration',
+            text: 'Database Administration Concentration'
+          }));
+          $('#concentration').append($('<option>', {
+            value: 'IT Enterprise Management Concentration',
+            text: 'IT Enterprise Management Concentration'
+          }));
+      }
+    });
+</script>
 
 {{=BEAUTIFY(response._vars)}}
