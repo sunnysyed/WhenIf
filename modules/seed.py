@@ -1,8 +1,3 @@
-#Current replacement for scraper.
-
-#Some member variables ended up not getting used at all in the alogrithm,
-#so I will clean things up in the future.
-
 # - - - - - IMPORTS - - - - - #
 
 from collections import OrderedDict
@@ -25,11 +20,11 @@ class Class:
     def __init__(self, code, name, isIntro, prereqs, terms, inClassOnly, onlineOnly, priority, OR):
         self.code = code
         self.name = name
-        self.isIntro = isIntro #NOT NECESSARY
+        self.isIntro = isIntro
         self.prereqs = prereqs
         self.terms = terms
         self.inClassOnly = inClassOnly
-        self.onlineOnly = onlineOnly #NOT NECESSARY
+        self.onlineOnly = onlineOnly
         self.priority = priority
         self.OR = OR #NOT NECESSARY
 
@@ -141,26 +136,3 @@ def getSeedData():
     concentrationsAndClasses['concentrations'] = concentrationDict
     concentrationsAndClasses['classes'] = classDict
     return concentrationsAndClasses
-
-# - - - - - DEBUG - - - - - #
-
-##for x in classDict:
-##    print x
-##    for y in classDict[x]:
-##        print y.code
-##        print y.name
-##        print y.isIntro
-##        print y.prereqs
-##        print y.terms
-##        print y.inClassOnly
-##        print y.onlineOnly
-##        print y.priority
-
-#print classDict
-
-##for x in degrees:
-##    print "DEGREE: " + x.name
-##    for y in x.concentrations:
-##        print "CONCENTRATION: " + concentrationDict[y].name
-##        for z in concentrationDict[y].classes:
-##            print "CLASS: " + classDict[z].name
