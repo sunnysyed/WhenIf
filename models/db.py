@@ -91,16 +91,26 @@ auth = Auth(db, host_names=myconf.get('host.names'))
 service = Service()
 plugins = PluginManager()
 
+db.define_table('degree_concentration',
+                Field('major_degree',requires = IS_NOT_EMPTY()),
+                Field('concentration',requires = IS_NOT_EMPTY()),
+                Field('link',requires = IS_NOT_EMPTY())
+                )
+
 ## after auth = Auth(db)
-#auth.settings.extra_fields['auth_user']= [
-#  Field('address', 'string'),
-#  Field('phone', 'string'),
-#  Field('date_of_birth', 'datetime'),
-#  Field('sex', 'string'),
-#  Field('faculty_Id', 'integer'),
-#  Field('major_Id', 'integer'),
-#  Field('start_date', 'datetime')
-#]
+auth.settings.extra_fields['auth_user']= [
+  Field('address', 'string'),
+  Field('phone', 'string', requires = IS_MATCH('^1?((-)\d{3}-?|\(\d{3}\))\d{3}-?\d{4}$',error_message='not a phone number')),
+  Field('date_of_birth', 'date'),
+  Field('sex', 'string', requires=IS_IN_SET(['Male', 'Female'])),
+  Field('faculty_Id', 'integer'),
+  Field('start_date', 'datetime'),
+  Field('major_Id', 'reference degree_concentration',
+      label = T('Major'),
+      notnull = True,
+      required = True,
+      requires = IS_IN_DB(db, db.degree_concentration.id, '%(major_degree)s - %(concentration)s') )
+]
 
 # -------------------------------------------------------------------------
 # create all tables needed by auth if not custom tables

@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 ### required - do no delete
 def user():
+    db.auth_user.faculty_Id.readable = db.auth_user.faculty_Id.writable = False 
+    db.auth_user.start_date.readable = db.auth_user.start_date.writable = False 
+
     form=auth()
+
 #    if request.args(0) == "register" and request.post_vars.first_name and request.post_vars.last_name:
 #        request.post_vars.username = request.post_vars.first_name + request.post_vars.last_name
         
