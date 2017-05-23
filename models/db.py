@@ -100,8 +100,8 @@ db.define_table('degree_concentration',
 ## after auth = Auth(db)
 auth.settings.extra_fields['auth_user']= [
   Field('address', 'string'),
-  Field('phone', 'string', requires = IS_MATCH('^1?((-)\d{3}-?|\(\d{3}\))\d{3}-?\d{4}$',error_message='not a phone number')),
-  Field('date_of_birth', 'date'),
+  Field('phone', 'string'),
+  Field('date_of_birth', 'datetime'),
   Field('sex', 'string', requires=IS_IN_SET(['Male', 'Female'])),
   Field('faculty_Id', 'integer'),
   Field('start_date', 'datetime'),
