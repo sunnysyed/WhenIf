@@ -98,7 +98,7 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
     
     return pathsDict
 
-def fastest(classOrder, seasons, classAmount, taken, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
+def fastest(classOrder, seasons, classAmount, takenClasses, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
     while len(classOrder) > 0:
         takenTemp = []
         waivedIntros = []
@@ -109,7 +109,7 @@ def fastest(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
             MECDone = isMEC and (MECCount >= 3)
             if MECDone:
                 del classOrder[cl]
-            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], taken, waivedIntros):
+            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], takenClasses, waivedIntros):
                 if (classOrder[cl].priority == 0) and (takenIntros):
                     del classOrder[cl]
                 else:
@@ -120,7 +120,7 @@ def fastest(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
                     if isMEC:
                         MECCount+=1
         for x in takenTemp:
-            taken.append(x)
+            takenClasses.append(x)
         if len(classOrder) > 0:
             if electiveCount > 0:
                 final.append('Elective')
@@ -136,7 +136,7 @@ def fastest(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
         season+=1
     return final
 
-def longest(classOrder, seasons, classAmount, taken, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
+def longest(classOrder, seasons, classAmount, takenClasses, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
     while len(classOrder) > 0:
         takingClass = False
         takenTemp = []
@@ -148,7 +148,7 @@ def longest(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
             MECDone = isMEC and (MECCount >= 3)
             if MECDone:
                 del classOrder[cl]
-            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], taken, waivedIntros) and (not takingClass):
+            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], takenClasses, waivedIntros) and (not takingClass):
                 if (classOrder[cl].priority == 0) and (takenIntros):
                     del classOrder[cl]
                 else:
@@ -160,7 +160,7 @@ def longest(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
                     if isMEC:
                         MECCount+=1
         for x in takenTemp:
-            taken.append(x)
+            takenClasses.append(x)
         if len(classOrder) > 0:
             if electiveCount > 0:
                 final.append('Elective')
@@ -176,7 +176,7 @@ def longest(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
         season+=1
     return final
 
-def inClass(classOrder, seasons, classAmount, taken, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
+def inClass(classOrder, seasons, classAmount, takenClasses, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
     while len(classOrder) > 0:
         takenTemp = []
         waivedIntros = []
@@ -190,7 +190,7 @@ def inClass(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
                 skipOnline = True
             if MECDone:
                 del classOrder[cl]
-            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], taken, waivedIntros) and (not skipOnline):
+            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], takenClasses, waivedIntros) and (not skipOnline):
                 if (classOrder[cl].priority == 0) and (takenIntros):
                     del classOrder[cl]
                 else:
@@ -201,7 +201,7 @@ def inClass(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
                     if isMEC:
                         MECCount+=1
         for x in takenTemp:
-            taken.append(x)
+            takenClasses.append(x)
         if len(classOrder) > 0:
             if electiveCount > 0:
                 final.append('Elective')
@@ -217,7 +217,7 @@ def inClass(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
         season+=1
     return final
 
-def online(classOrder, seasons, classAmount, taken, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
+def online(classOrder, seasons, classAmount, takenClasses, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
     while len(classOrder) > 0:
         takenTemp = []
         waivedIntros = []
@@ -230,7 +230,7 @@ def online(classOrder, seasons, classAmount, taken, season, MEC, final, elective
                 del classOrder[cl]
             elif MECDone:
                 del classOrder[cl]
-            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], taken, waivedIntros):
+            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], takenClasses, waivedIntros):
                 if (classOrder[cl].priority == 0) and (takenIntros):
                     del classOrder[cl]
                 else:
@@ -241,7 +241,7 @@ def online(classOrder, seasons, classAmount, taken, season, MEC, final, elective
                     if isMEC:
                         MECCount+=1
         for x in takenTemp:
-            taken.append(x)
+            takenClasses.append(x)
         if len(classOrder) > 0:
             if electiveCount > 0:
                 final.append('Elective')
