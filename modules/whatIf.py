@@ -30,7 +30,10 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
     
     if (degree == 'Computer Science') or concentration == "Standard Concentration":
         MEC = []
-        requiredIntros = ['CSC 400', 'CSC 401', 'CSC 402', 'CSC 403', 'CSC 406', 'CSC 407']
+        if degree == "Information Systems":
+            requiredIntros = []
+        else:
+            requiredIntros = ['CSC 400', 'CSC 401', 'CSC 402', 'CSC 403', 'CSC 406', 'CSC 407']
 
     elif concentration == "Business Analysis/Systems Analysis Concentration":
         MEC = ['ECT 424', 'ECT 480', 'HCI 440', 'IS 431', 'IS 440', 'IS 455', 'IS 540', 'IS 556', 'IS 565', 'IS 578']
@@ -86,6 +89,12 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
 
     easiest = fastest(easyOrder, seasons, classAmount, takenClasses, season, MEC, finalEasy, electiveCount, MECCount, takenIntros, requiredIntros)
     pathsDict['easiest_path'] = easiest
+
+    season = 0
+    MECCount = 0
+    takenClasses = list(taken)
+    electiveCount = concentrationDict[concentration].electiveCount
+    MECCount = 0
     
     return pathsDict
 
