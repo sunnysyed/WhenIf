@@ -34,3 +34,9 @@ def students():
     return locals()
 def error():
     return dict()
+
+@auth.requires_login()
+def myprofile():
+    major = db(db.degree_concentration.id == auth.user.major_Id).select().first()
+    courses = db(db.course_taken.student == auth.user.id).select()
+    return dict(user=auth.user, courses =courses, major=major)
