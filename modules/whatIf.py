@@ -10,13 +10,14 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
     seasons = ['Fall', 'Winter', 'Spring', 'Summer']
     classOrder = OrderedDict()
     for z in concentrationDict[concentration].classes:
-        classOrder[z] = classDict[z]
+        if classDict[z].code not in taken:
+            classOrder[z] = classDict[z]
     classOrder = OrderedDict(sorted(classOrder.iteritems(), key=lambda c: c[1].priority))
     reverseOrder = OrderedDict(reversed(list(classOrder.items())))
     inClassOrder = OrderedDict(classOrder)
     onlineOrder = OrderedDict(classOrder)
     easyOrder = OrderedDict(sorted(classOrder.iteritems(), key=lambda c: c[1].ease))
-
+    
     pathsDict = {}
     takenClasses = list(taken)
     finalShortest = []
@@ -277,3 +278,12 @@ def printClasses(classes, degree, concentration):
     print("CONCENTRATION: " + concentration)
     for cl in classes:
         print(cl)
+                                                        
+# - - - - - RUN PROGRAM - - - - - #
+
+whenIf('Computer Science', "Computer Science", 'Fall', 2, [], getSeedData(), False)
+whenIf("Information Systems", "Business Analysis/Systems Analysis Concentration", 'Fall', 2, ['IS 560'], getSeedData(), True)
+whenIf("Information Systems", "Business Intelligence Concentration", 'Fall', 2, [], getSeedData(), False)
+whenIf("Information Systems", "Database Administration Concentration", 'Fall', 2, [], getSeedData(), False)
+whenIf("Information Systems", "IT Enterprise Management Concentration", 'Fall', 2, [], getSeedData(), False)
+whenIf("Information Systems", "Standard Concentration", 'Fall', 2, [], getSeedData(), False)
