@@ -10,13 +10,14 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
     seasons = ['Fall', 'Winter', 'Spring', 'Summer']
     classOrder = OrderedDict()
     for z in concentrationDict[concentration].classes:
-        classOrder[z] = classDict[z]
+        if classDict[z].code not in taken:
+            classOrder[z] = classDict[z]
     classOrder = OrderedDict(sorted(classOrder.iteritems(), key=lambda c: c[1].priority))
     reverseOrder = OrderedDict(reversed(list(classOrder.items())))
     inClassOrder = OrderedDict(classOrder)
     onlineOrder = OrderedDict(classOrder)
     easyOrder = OrderedDict(sorted(classOrder.iteritems(), key=lambda c: c[1].ease))
-
+    
     pathsDict = {}
     takenClasses = list(taken)
     finalShortest = []
@@ -32,7 +33,10 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
     
     if (degree == 'Computer Science') or concentration == "Standard Concentration":
         MEC = []
-        requiredIntros = ['CSC 400', 'CSC 401', 'CSC 402', 'CSC 403', 'CSC 406', 'CSC 407']
+        if degree == "Information Systems":
+            requiredIntros = []
+        else:
+            requiredIntros = ['CSC 400', 'CSC 401', 'CSC 402', 'CSC 403', 'CSC 406', 'CSC 407']
 
     elif concentration == "Business Analysis/Systems Analysis Concentration":
         MEC = ['ECT 424', 'ECT 480', 'HCI 440', 'IS 431', 'IS 440', 'IS 455', 'IS 540', 'IS 556', 'IS 565', 'IS 578']
@@ -88,10 +92,16 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
 
     easiest = fastest(easyOrder, seasons, classAmount, takenClasses, season, MEC, finalEasy, electiveCount, MECCount, takenIntros, requiredIntros)
     pathsDict['easiest_path'] = easiest
+
+    season = 0
+    MECCount = 0
+    takenClasses = list(taken)
+    electiveCount = concentrationDict[concentration].electiveCount
+    MECCount = 0
     
     return pathsDict
 
-def fastest(classOrder, seasons, classAmount, taken, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
+def fastest(classOrder, seasons, classAmount, takenClasses, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
     while len(classOrder) > 0:
         takenTemp = []
         waivedIntros = []
@@ -102,7 +112,7 @@ def fastest(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
             MECDone = isMEC and (MECCount >= 3)
             if MECDone:
                 del classOrder[cl]
-            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], taken, waivedIntros):
+            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], takenClasses, waivedIntros):
                 if (classOrder[cl].priority == 0) and (takenIntros):
                     del classOrder[cl]
                 else:
@@ -113,7 +123,7 @@ def fastest(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
                     if isMEC:
                         MECCount+=1
         for x in takenTemp:
-            taken.append(x)
+            takenClasses.append(x)
         if len(classOrder) > 0:
             if electiveCount > 0:
                 final.append('Elective')
@@ -129,7 +139,7 @@ def fastest(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
         season+=1
     return final
 
-def longest(classOrder, seasons, classAmount, taken, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
+def longest(classOrder, seasons, classAmount, takenClasses, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
     while len(classOrder) > 0:
         takingClass = False
         takenTemp = []
@@ -141,7 +151,7 @@ def longest(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
             MECDone = isMEC and (MECCount >= 3)
             if MECDone:
                 del classOrder[cl]
-            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], taken, waivedIntros) and (not takingClass):
+            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], takenClasses, waivedIntros) and (not takingClass):
                 if (classOrder[cl].priority == 0) and (takenIntros):
                     del classOrder[cl]
                 else:
@@ -153,7 +163,7 @@ def longest(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
                     if isMEC:
                         MECCount+=1
         for x in takenTemp:
-            taken.append(x)
+            takenClasses.append(x)
         if len(classOrder) > 0:
             if electiveCount > 0:
                 final.append('Elective')
@@ -169,7 +179,7 @@ def longest(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
         season+=1
     return final
 
-def inClass(classOrder, seasons, classAmount, taken, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
+def inClass(classOrder, seasons, classAmount, takenClasses, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
     while len(classOrder) > 0:
         takenTemp = []
         waivedIntros = []
@@ -183,7 +193,7 @@ def inClass(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
                 skipOnline = True
             if MECDone:
                 del classOrder[cl]
-            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], taken, waivedIntros) and (not skipOnline):
+            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], takenClasses, waivedIntros) and (not skipOnline):
                 if (classOrder[cl].priority == 0) and (takenIntros):
                     del classOrder[cl]
                 else:
@@ -194,7 +204,7 @@ def inClass(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
                     if isMEC:
                         MECCount+=1
         for x in takenTemp:
-            taken.append(x)
+            takenClasses.append(x)
         if len(classOrder) > 0:
             if electiveCount > 0:
                 final.append('Elective')
@@ -210,7 +220,7 @@ def inClass(classOrder, seasons, classAmount, taken, season, MEC, final, electiv
         season+=1
     return final
 
-def online(classOrder, seasons, classAmount, taken, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
+def online(classOrder, seasons, classAmount, takenClasses, season, MEC, final, electiveCount, MECCount, takenIntros, requiredIntros):
     while len(classOrder) > 0:
         takenTemp = []
         waivedIntros = []
@@ -223,7 +233,7 @@ def online(classOrder, seasons, classAmount, taken, season, MEC, final, elective
                 del classOrder[cl]
             elif MECDone:
                 del classOrder[cl]
-            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], taken, waivedIntros):
+            elif (seasons[(season/classAmount)%4] in classOrder[cl].terms) and check_pres(classOrder[cl], takenClasses, waivedIntros):
                 if (classOrder[cl].priority == 0) and (takenIntros):
                     del classOrder[cl]
                 else:
@@ -234,7 +244,7 @@ def online(classOrder, seasons, classAmount, taken, season, MEC, final, elective
                     if isMEC:
                         MECCount+=1
         for x in takenTemp:
-            taken.append(x)
+            takenClasses.append(x)
         if len(classOrder) > 0:
             if electiveCount > 0:
                 final.append('Elective')
@@ -270,3 +280,12 @@ def printClasses(classes, degree, concentration):
     print("CONCENTRATION: " + concentration)
     for cl in classes:
         print(cl)
+                                                        
+# - - - - - RUN PROGRAM - - - - - #
+
+whenIf('Computer Science', "Computer Science", 'Fall', 2, [], getSeedData(), False)
+whenIf("Information Systems", "Business Analysis/Systems Analysis Concentration", 'Fall', 2, ['IS 560'], getSeedData(), True)
+whenIf("Information Systems", "Business Intelligence Concentration", 'Fall', 2, [], getSeedData(), False)
+whenIf("Information Systems", "Database Administration Concentration", 'Fall', 2, [], getSeedData(), False)
+whenIf("Information Systems", "IT Enterprise Management Concentration", 'Fall', 2, [], getSeedData(), False)
+whenIf("Information Systems", "Standard Concentration", 'Fall', 2, [], getSeedData(), False)
