@@ -2,16 +2,14 @@
 ### required - do no delete
 def user():
     db.auth_user.faculty_Id.readable = db.auth_user.faculty_Id.writable = False 
-    db.auth_user.start_date.readable = db.auth_user.start_date.writable = False 
-
+    db.auth_user.start_date.readable = db.auth_user.start_date.writable = False
+    db.auth_user.require_introduction_courses.readable = db.auth_user.require_introduction_courses.writable = False 
     form=auth()
 
-#    if request.args(0) == "register" and request.post_vars.first_name and request.post_vars.last_name:
-#        request.post_vars.username = request.post_vars.first_name + request.post_vars.last_name
-        
     if request.args(0) == "register" and form.process().accepted:
         user_id = form.vars.id
     return dict(form = form)
+
 def download(): return response.download(request,db)
 def call(): return service()
 ### end requires
@@ -23,20 +21,45 @@ def search():
     return dict()
 @auth.requires_login()
 def result():
+    taken = []
+    courses = db(db.course_taken.student == auth.user.id).select()
+    for course in courses:
+        taken.append(course.course.course_name)
     seedData = seed.getSeedData()
-    data = whatIf.whatIf(request.vars.degree, "Computer Science", request.vars.quarter, int(request.vars.courses), [], seedData)
-    return dict(data=data, seedData=seedData)
+    data = whatIf.whenIf(request.vars.degree, request.vars.concentration, request.vars.quarter, int(request.vars.courses), taken, seedData, auth.user.require_introduction_courses)
+    return dict(data=data)
 
 @auth.requires_login()
 @auth.requires_membership("faculty")
 def students():
-    grid = SQLFORM.grid(db.auth_user)
-    return locals()
+    grid = SQLFORM.smartgrid(db.auth_user,
+                        deletable=True,
+                        editable=True,
+                        details=True,
+                        create=True,
+                        user_signature=False, linked_tables=['course_taken'])
+    return dict(grid=grid)
 def error():
     return dict()
 
 @auth.requires_login()
 def myprofile():
     major = db(db.degree_concentration.id == auth.user.major_Id).select().first()
+    faculty = db(db.auth_user.id == auth.user.faculty_Id).select().first()
     courses = db(db.course_taken.student == auth.user.id).select()
-    return dict(user=auth.user, courses =courses, major=major)
+    return dict(user=auth.user, courses =courses, major=major, faculty=faculty)
+
+@auth.requires_login()
+@auth.requires_membership("admin")
+def seedcourses():
+    db.course.truncate()
+    seedData = seed.getSeedData()
+    for course in seedData['classes']:
+        c = seedData['classes'][course]
+        db.course.insert(course_name=course,course_full_name=c.name)
+    return "Seed Complete"
+
+@auth.requires_login()
+@auth.requires_membership("admin")
+def trunc_user():
+    return db.auth_user.truncate()

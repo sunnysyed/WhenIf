@@ -28,6 +28,8 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
     season = 0
     electiveCount = concentrationDict[concentration].electiveCount
     MECCount = 0
+    MEC = []
+    requiredIntros = []
     
     if (degree == 'Computer Science') or concentration == "Standard Concentration":
         MEC = []

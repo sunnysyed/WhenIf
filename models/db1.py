@@ -3,27 +3,17 @@
 db.define_table('course',
                 Field('course_name',requires = IS_NOT_EMPTY()),
                 Field('course_full_name',requires = IS_NOT_EMPTY()),
-                Field('major_degree',db.degree_concentration),
-                Field('conc',db.degree_concentration),
-                Field('unit',type = 'integer',requires = IS_NOT_EMPTY()),
-                Field('description',type = 'text',requires = IS_NOT_EMPTY()),
-                Field('intoductory',type = 'boolean',requires = IS_NOT_EMPTY()),
-                Field('inClassOnly',type = 'boolean',requires = IS_NOT_EMPTY()),
-                Field('onlineOnly',type = 'boolean',requires = IS_NOT_EMPTY()),
-                Field('priority',type = 'integer',requires = IS_NOT_EMPTY())
-                )
-
-db.define_table('preqs',
-                Field('course',db.course),
-                Field('preqs',db.course)
+                Field('description',type = 'text'),
+                Field('intoductory',type = 'boolean', default=False),
+                Field('inClassOnly',type = 'boolean', default=False),
+                Field('onlineOnly',type = 'boolean', default=False),
                 )
 
 db.define_table('course_taken',
                 Field('student',db.auth_user),
-                Field('course',db.course)
-                )
-
-db.define_table('term',
-                Field('course',db.course),
-                Field('term',requires = IS_NOT_EMPTY())
+                Field('course', 'reference course',
+                      label = T('Course'),
+                      notnull = True,
+                      required = True,
+                      requires = IS_IN_DB(db, db.course.id, '%(course_name)s - %(course_full_name)s'))
                 )

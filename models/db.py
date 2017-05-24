@@ -105,6 +105,7 @@ auth.settings.extra_fields['auth_user']= [
   Field('sex', 'string', requires=IS_IN_SET(['Male', 'Female'])),
   Field('faculty_Id', 'integer'),
   Field('start_date', 'datetime'),
+  Field('require_introduction_courses', 'boolean', default=False),
   Field('major_Id', 'reference degree_concentration',
       label = T('Major'),
       notnull = True,
