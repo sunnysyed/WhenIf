@@ -1,5 +1,55 @@
 {{extend 'layout.html'}}
-
+<style>
+/*Business Card Css */
+.business-card {
+  border: 1px solid #cccccc;
+  background: #f8f8f8;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.profile-img {
+  height: 120px;
+  background: white;
+}
+.job {
+  color: #666666;
+  font-size: 17px;
+}
+.mail {
+  font-size: 16px;
+ }
+</style>
+<h1>
+    WhenIf History:
+</h1>
+<br>
+{{if auth.is_logged_in():}}
+	<div class="row">
+        {{if len(history) > 0:}}
+            {{for h in history:}}
+            <div class="col-sm-3">
+                <div class="business-card">
+                    <div class="media">
+                        <div class="media-body">
+                            <h2 class="media-heading">{{=h.major}}</h2>
+                            <div class="job">{{=h.concentration}}</div>
+                            <div class="mail"><b>Starting Quarter:</b> {{=h.quarter}}</div>
+                            <div><b>Number of Classes Per Quarter:</b> {{=h.courses}}</div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{pass}}
+        {{else:}}
+            <img src="http://cdn.niketalk.com/b/b4/900x900px-LL-b4043091_emptybox.gif"/>
+            <h3>
+                Sorry you haven't ran any WhenIf. Head over to search to run a WhenIf.
+            </h3>
+        {{pass}}
+	</div>
+{{else:}}
 <div class="container-fluid">
             <h1>When If</h1>
 
@@ -32,3 +82,5 @@
 
     </div>
 </div>
+
+{{pass}}

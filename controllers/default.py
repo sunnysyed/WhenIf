@@ -14,6 +14,9 @@ def download(): return response.download(request,db)
 def call(): return service()
 ### end requires
 def index():
+    if auth.is_logged_in():
+        history = db(db.history.student == auth.user.id).select()
+        return dict(history=history)
     return dict()
 
 @auth.requires_login()
@@ -21,6 +24,7 @@ def search():
     return dict()
 @auth.requires_login()
 def result():
+    db.history.insert(student=auth.user,major=request.vars.degree, concentration=request.vars.concentration, quarter=request.vars.quarter, courses=int(request.vars.courses))
     taken = []
     courses = db(db.course_taken.student == auth.user.id).select()
     for course in courses:

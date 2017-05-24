@@ -17,3 +17,11 @@ db.define_table('course_taken',
                       required = True,
                       requires = IS_IN_DB(db, db.course.id, '%(course_name)s - %(course_full_name)s'))
                 )
+
+db.define_table('history',
+                Field('student','reference auth_user'),
+                Field('major',type='text'),
+                Field('concentration',type='text'),
+                Field('quarter',type='text'),
+                Field('courses', type='integer')
+                )
