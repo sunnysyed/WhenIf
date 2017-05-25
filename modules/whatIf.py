@@ -280,12 +280,3 @@ def printClasses(classes, degree, concentration):
     print("CONCENTRATION: " + concentration)
     for cl in classes:
         print(cl)
-                                                        
-# - - - - - RUN PROGRAM - - - - - #
-
-whenIf('Computer Science', "Computer Science", 'Fall', 2, [], getSeedData(), False)
-whenIf("Information Systems", "Business Analysis/Systems Analysis Concentration", 'Fall', 2, ['IS 560'], getSeedData(), True)
-whenIf("Information Systems", "Business Intelligence Concentration", 'Fall', 2, [], getSeedData(), False)
-whenIf("Information Systems", "Database Administration Concentration", 'Fall', 2, [], getSeedData(), False)
-whenIf("Information Systems", "IT Enterprise Management Concentration", 'Fall', 2, [], getSeedData(), False)
-whenIf("Information Systems", "Standard Concentration", 'Fall', 2, [], getSeedData(), False)

@@ -20,11 +20,11 @@
   font-size: 16px;
  }
 </style>
+{{if auth.is_logged_in():}}
 <h1>
     WhenIf History:
 </h1>
 <br>
-{{if auth.is_logged_in():}}
 	<div class="row">
         {{if len(history) > 0:}}
             {{for h in history:}}
@@ -52,6 +52,7 @@
 {{else:}}
 <div class="container-fluid">
             <h1>When If</h1>
+            <br>
 
    <div class="row">
 	<img src="https://www.depaul.edu/PublishingImages/homepage-splash/nationallyJan.png" class="img-responsive">
