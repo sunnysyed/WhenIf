@@ -6,6 +6,10 @@ from collections import OrderedDict
 
 def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntros):
     concentrationDict = seedData['concentrations']
+    if concentration == "Standard Concentration":
+        if degree == 'Computer Science':
+            concentration = 'Computer Science'
+    concentrationDict = seedData['concentrations']
     classDict = seedData['classes']
     seasons = ['Fall', 'Winter', 'Spring', 'Summer']
     classOrder = OrderedDict()
@@ -28,8 +32,6 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
     season = 0
     electiveCount = concentrationDict[concentration].electiveCount
     MECCount = 0
-    MEC = []
-    requiredIntros = []
     
     if (degree == 'Computer Science') or concentration == "Standard Concentration":
         MEC = []
@@ -56,6 +58,7 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
     
     shortest = fastest(classOrder, seasons, classAmount, takenClasses, season, MEC, finalShortest, electiveCount, MECCount, takenIntros, requiredIntros)
     pathsDict['fastest_path'] = shortest
+    printClasses(shortest, degree, concentration)
     
     season = 0
     MECCount = 0
@@ -65,6 +68,7 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
 
     longestOrder = longest(reverseOrder, seasons, classAmount, takenClasses, season, MEC, finalLongest, electiveCount, MECCount, takenIntros, requiredIntros)
     pathsDict['longest_path'] = longestOrder
+    printClasses(longestOrder, degree, concentration)
 
     season = 0
     MECCount = 0
@@ -74,6 +78,7 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
 
     inClassFriendly = inClass(inClassOrder, seasons, classAmount, takenClasses, season, MEC, finalInClass, electiveCount, MECCount, takenIntros, requiredIntros)
     pathsDict['in_class_path'] = inClassFriendly
+    printClasses(inClassFriendly, degree, concentration)
 
     season = 0
     MECCount = 0
@@ -83,6 +88,7 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
 
     onlineFriendly = online(onlineOrder, seasons, classAmount, takenClasses, season, MEC, finalOnline, electiveCount, MECCount, takenIntros, requiredIntros)
     pathsDict['online_path'] = onlineFriendly
+    printClasses(onlineFriendly, degree, concentration)
 
     season = 0
     MECCount = 0
@@ -92,6 +98,7 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
 
     easiest = fastest(easyOrder, seasons, classAmount, takenClasses, season, MEC, finalEasy, electiveCount, MECCount, takenIntros, requiredIntros)
     pathsDict['easiest_path'] = easiest
+    printClasses(easiest, degree, concentration)
 
     season = 0
     MECCount = 0
