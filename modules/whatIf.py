@@ -98,8 +98,6 @@ def whenIf(degree, concentration, start, classAmount, taken, seedData, takenIntr
 
     easiest = fastest(easyOrder, seasons, classAmount, takenClasses, season, MEC, finalEasy, electiveCount, MECCount, takenIntros, requiredIntros)
     pathsDict['easiest_path'] = easiest
-    printClasses(easiest, degree, concentration)
-
     season = 0
     MECCount = 0
     takenClasses = list(taken)
